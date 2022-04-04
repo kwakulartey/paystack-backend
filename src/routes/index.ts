@@ -4,6 +4,7 @@ import {
   generateAccessToken,
   submitOtp,
   verifyReference,
+  handleWebhook,
 } from "../controllers/payment-controller";
 
 // Payment Routes
@@ -17,4 +18,5 @@ export const paymentRoutes = Router()
   .get("/verify/:reference", verifyReference)
   // for mobile payments
   .post("/charge", chargeRequest)
-  .post("/submit-otp", submitOtp);
+  .post("/submit-otp", submitOtp)
+  .post("/webhook", handleWebhook);

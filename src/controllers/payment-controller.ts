@@ -2,6 +2,11 @@ import { AxiosResponse } from "axios";
 import { randomUUID } from "crypto";
 import { Request, Response } from "express";
 import { paystackAxiosClient } from "../services/axios-instance";
+import { firebaseApp } from "../services/firebase";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
+// initialize Cloud Firestore
+const firestore = getFirestore(firebaseApp);
 
 /**
  * Refer to the [Paystack API docs](https://paystack.com/docs/api/#transaction-initialize) for more info
@@ -58,7 +63,7 @@ export const chargeRequest = async (req: Request, res: Response) => {
     if (response.status === 200) return res.json(response.data);
   } catch (error) {
     console.log("Charge Error:", error.response.data);
-    console.log('Charge Error Message:' ,error?.response?.data?.data?.message);
+    console.log("Charge Error Message:", error?.response?.data?.data?.message);
     return res.status(400).send(error?.response?.data?.data?.message);
   }
 };
@@ -78,5 +83,19 @@ export const submitOtp = async (req: Request, res: Response) => {
   } catch (error) {
     console.log("Charge Error:", error);
     return res.status(400).send("Charge OTP validation failed");
+  }
+};
+
+export const handleWebhook = async (req: Request, res: Response) => {
+  try {
+    console.log(`Incoming data: ${JSON.stringify(req.body, null, 2)}`);
+    // TODO: Handle business logic... what do you want to do with the data from Paystack
+    // Save it to Firebase
+    const invoiceCollection = collection(firestore, "invoices");
+    addDoc(invoiceCollection, req.body);
+    return res.json(req.body);
+  } catch (error) {
+    console.log("Webhook Error:", error);
+    return res.status(400).send("Something went wrong");
   }
 };
