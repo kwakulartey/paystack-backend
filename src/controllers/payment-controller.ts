@@ -74,7 +74,7 @@ export const chargeRequest = async (req: Request, res: Response) => {
 export const submitOtp = async (req: Request, res: Response) => {
   try {
     const { otp, reference } = req.body;
-    const response = await paystackAxiosClient.post("/charge/submit-otp", {
+    const response = await paystackAxiosClient.post("/charge/submit_otp", {
       otp,
       reference,
     });
