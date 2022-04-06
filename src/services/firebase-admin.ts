@@ -8,8 +8,8 @@ var admin = require("firebase-admin");
 
 
 //var serviceAccount = require("path/to/serviceAccountKey.json");
-//  const firebaseApp = 
-// global.firebaseApp ??
+  const firebaseApp = 
+ global.firebaseApp ??
 admin.initializeApp({
   credential: admin.credential.cert({
       projectId: process.env.FIREBASE_PROJECT_ID,
@@ -22,4 +22,4 @@ admin.initializeApp({
 export default admin;
 
 
-//global.firebaseApp = firebaseApp;
+global.firebaseApp = firebaseApp;
