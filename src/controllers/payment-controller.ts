@@ -4,9 +4,11 @@ import { Request, Response } from "express";
 import { paystackAxiosClient } from "../services/axios-instance";
 import { firebaseApp } from "../services/firebase";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
+import admin from "../services/firebase-admin";
 
 // initialize Cloud Firestore
-const firestore = getFirestore(firebaseApp);
+//const firestore = getFirestore(firebaseApp);
+const firestore = getFirestore(admin)
 
 /**
  * Refer to the [Paystack API docs](https://paystack.com/docs/api/#transaction-initialize) for more info
