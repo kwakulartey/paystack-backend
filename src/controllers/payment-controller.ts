@@ -8,7 +8,7 @@ import admin from "../services/firebase-admin";
 
 // initialize Cloud Firestore
 //const firestore = getFirestore(firebaseApp);
-const firestore = getFirestore(admin)
+const firestore = getFirestore(firebaseApp)
 
 /**
  * Refer to the [Paystack API docs](https://paystack.com/docs/api/#transaction-initialize) for more info

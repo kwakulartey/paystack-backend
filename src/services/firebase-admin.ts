@@ -22,5 +22,4 @@ admin.initializeApp({
 
 export default admin.firestore();
 
-
 global.firebaseApp = firebaseApp;
